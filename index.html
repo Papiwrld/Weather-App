@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A beginner-friendly weather app that shows current weather and forecasts for any city">
-    <title>Weather App - Learn Frontend Development</title>
-    
+    <meta name="description"
+        content="A beginner-friendly weather app that shows current weather and forecasts for any city">
+    <title>Weather App - Developed By Eugene</title>
+
     <!-- CSS file for styling -->
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Favicon for the browser tab -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>">
 </head>
+
 <body>
     <!-- Main container - everything goes inside this -->
     <main class="app-container">
-        
+
+        <!-- Weather Effects Container -->
+        <div id="weather-effects" class="weather-effects" aria-hidden="true"></div>
+
         <!-- App Header -->
         <header class="app-header">
             <h1 class="app-title">
@@ -31,44 +38,28 @@
                 <!-- Search input with proper labeling -->
                 <div class="search-input-group">
                     <label for="city-input" class="visually-hidden">Enter city name</label>
-                    <input 
-                        type="text" 
-                        id="city-input" 
-                        class="search-input" 
-                        placeholder="Search city..."
-                        aria-describedby="search-help"
-                        autocomplete="off"
-                        spellcheck="false"
-                    >
-                    <button 
-                        type="button" 
-                        id="search-btn" 
-                        class="search-btn"
-                        aria-label="Search for weather"
-                    >
+                    <input type="text" id="city-input" class="search-input" placeholder="Search city..."
+                        aria-describedby="search-help" autocomplete="off" spellcheck="false">
+                    <button type="button" id="search-btn" class="search-btn" aria-label="Search for weather">
                         🔍
                     </button>
                 </div>
-                
+
                 <!-- Location button for using current location -->
-                <button 
-                    type="button" 
-                    id="location-btn" 
-                    class="location-btn"
-                    aria-label="Use my current location"
-                >
+                <button type="button" id="location-btn" class="location-btn" aria-label="Use my current location">
                     📍 My Location
                 </button>
             </div>
-            
+
             <!-- Search suggestions (hidden by default) -->
             <div id="search-suggestions" class="search-suggestions" aria-hidden="true">
                 <!-- Popular cities will be populated here -->
             </div>
-            
+
             <!-- Help text for screen readers -->
             <div id="search-help" class="visually-hidden">
-                Press Enter or click the search button to find weather for a city. Type 3 or more characters for auto-search.
+                Press Enter or click the search button to find weather for a city. Type 3 or more characters for
+                auto-search.
             </div>
         </section>
 
@@ -88,7 +79,7 @@
 
         <!-- Main Weather Content -->
         <div id="weather-content" class="weather-content" aria-hidden="true">
-            
+
             <!-- Current Weather Card -->
             <section class="weather-card current-weather" aria-label="Current weather">
                 <div class="weather-header">
@@ -97,26 +88,18 @@
                         <p id="city-country" class="city-country">Country</p>
                         <p id="current-time" class="current-time">Loading time...</p>
                     </div>
-                    
+
                     <!-- Temperature and Unit Toggle -->
                     <div class="temperature-section">
                         <div class="temperature-display">
                             <span id="temperature" class="temperature">--</span>
                             <div class="unit-toggle">
-                                <button 
-                                    id="celsius-btn" 
-                                    class="unit-btn active" 
-                                    data-unit="celsius"
-                                    aria-label="Show temperature in Celsius"
-                                >
+                                <button id="celsius-btn" class="unit-btn active" data-unit="celsius"
+                                    aria-label="Show temperature in Celsius">
                                     <span>°C</span>
                                 </button>
-                                <button 
-                                    id="fahrenheit-btn" 
-                                    class="unit-btn" 
-                                    data-unit="fahrenheit"
-                                    aria-label="Show temperature in Fahrenheit"
-                                >
+                                <button id="fahrenheit-btn" class="unit-btn" data-unit="fahrenheit"
+                                    aria-label="Show temperature in Fahrenheit">
                                     <span>°F</span>
                                 </button>
                             </div>
@@ -132,7 +115,7 @@
                         </div>
                         <p id="weather-description" class="weather-description">Weather description</p>
                     </div>
-                    
+
                     <!-- Weather Stats Grid -->
                     <div class="weather-stats">
                         <div class="stat-item">
@@ -173,8 +156,9 @@
     <!-- Configuration file - you need to create this with your API key -->
     <!-- See config.example.js for instructions -->
     <script src="config.js"></script>
-    
+
     <!-- Main JavaScript file -->
     <script src="script.js"></script>
 </body>
+
 </html>

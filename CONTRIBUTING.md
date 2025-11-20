@@ -196,3 +196,5 @@ Thank you for contributing to the Weather App! Your contributions help make this
 ---
 
 **Happy Coding! 🌤️**
+
+

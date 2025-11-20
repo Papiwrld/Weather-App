@@ -1,0 +1,110 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Validate HTML
+      run: |
+        echo "Checking HTML syntax..."
+        # Basic HTML validation (you can add more sophisticated validation later)
+        if ! grep -q "<!DOCTYPE html>" index.html; then
+          echo "❌ index.html should start with DOCTYPE declaration"
+          exit 1
+        fi
+        echo "✅ HTML structure looks good"
+        
+    - name: Validate CSS
+      run: |
+        echo "Checking CSS syntax..."
+        # Basic CSS validation (you can add more sophisticated validation later)
+        if ! grep -q "{" styles.css; then
+          echo "❌ styles.css appears to be empty or invalid"
+          exit 1
+        fi
+        echo "✅ CSS structure looks good"
+        
+    - name: Validate JavaScript
+      run: |
+        echo "Checking JavaScript syntax..."
+        # Basic JavaScript validation (you can add more sophisticated validation later)
+        if ! grep -q "function\|const\|let\|var" script.js; then
+          echo "❌ script.js appears to be empty or invalid"
+          exit 1
+        fi
+        echo "✅ JavaScript structure looks good"
+        
+    - name: Check for config.js
+      run: |
+        echo "Checking for sensitive files..."
+        if [ -f "config.js" ]; then
+          echo "❌ config.js should not be committed to the repository"
+          echo "This file contains your API key and should be in .gitignore"
+          exit 1
+        fi
+        echo "✅ No sensitive files found"
+        
+    - name: Check for config.example.js
+      run: |
+        echo "Checking for template files..."
+        if [ ! -f "config.example.js" ]; then
+          echo "❌ config.example.js should be present for others to use"
+          exit 1
+        fi
+        echo "✅ Template files present"
+        
+    - name: Check for essential files
+      run: |
+        echo "Checking for essential project files..."
+        required_files=("index.html" "styles.css" "script.js" "README.md" ".gitignore" "LICENSE")
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Missing required file: $file"
+            exit 1
+          fi
+        done
+        echo "✅ All essential files present"
+        
+    - name: Check file sizes
+      run: |
+        echo "Checking file sizes..."
+        # Check if files are reasonable sizes (not empty, not too large)
+        files=("index.html" "styles.css" "script.js")
+        for file in "${files[@]}"; do
+          size=$(wc -c < "$file")
+          if [ "$size" -lt 100 ]; then
+            echo "❌ $file appears to be too small ($size bytes)"
+            exit 1
+          fi
+          if [ "$size" -gt 1000000 ]; then
+            echo "⚠️  $file is quite large ($size bytes) - consider optimization"
+          fi
+        done
+        echo "✅ File sizes are reasonable"
+        
+    - name: Check for API key in example file
+      run: |
+        echo "Checking config.example.js for placeholder..."
+        if grep -q "YOUR_API_KEY_HERE" config.example.js; then
+          echo "✅ config.example.js contains proper placeholder"
+        else
+          echo "❌ config.example.js should contain 'YOUR_API_KEY_HERE' placeholder"
+          exit 1
+        fi
+        
+    - name: Success message
+      run: |
+        echo "🎉 All checks passed!"
+        echo "Your Weather App is ready for GitHub!"
+
+

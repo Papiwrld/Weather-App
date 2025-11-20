@@ -149,3 +149,5 @@ When adding new entries to the changelog:
 ---
 
 **Note**: This changelog follows the [Keep a Changelog](https://keepachangelog.com/) format and uses [Semantic Versioning](https://semver.org/) for version numbers.
+
+
